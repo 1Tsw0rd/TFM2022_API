@@ -81,7 +81,7 @@ public class Tfm2022ApiController {
 
     }
 
-    @PostMapping("/api/authCheck")
+    @PostMapping("/api/authcheck")
     @ApiOperation(value = "세션 검사", notes = "localhost:8080/api/authCheck")
     public ResponseEntity<JSONObject> checkAuth(@RequestBody TfmAuthDto dto) {
 // 로그아웃 => 로그아웃시간 갱신, 토큰값 삭제, login.html로 이동
@@ -98,7 +98,7 @@ public class Tfm2022ApiController {
 
     }
 
-    @PatchMapping("/api/logoutCheck")
+    @PatchMapping("/api/logoutcheck")
     @ApiOperation(value = "로그아웃", notes = "localhost:8080/api/logoutCheck")
     public ResponseEntity<String> checkLogout(@RequestBody TfmAuthDto dto){
 
