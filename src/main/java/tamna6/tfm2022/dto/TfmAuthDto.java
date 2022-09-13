@@ -19,6 +19,8 @@ public class TfmAuthDto {
     private LocalDateTime lastlogin;
     private LocalDateTime lastlogout;
 
-    public TfmAuth toEntity() {return  new TfmAuth(ID, token, lastlogin, lastlogout);}
+    private LocalDateTime lastrequest;
+
+    public TfmAuth toEntity() {return  new TfmAuth(ID, token, lastlogin, lastlogout, lastrequest);}
 
 }

@@ -128,7 +128,8 @@ public class Tfm2022Service {
                     dto.getId(),
                     null,
                     nowTime,
-                    null
+                    null,
+                    nowTime
             );
 
             log.info("CheckAuthId null authDto 1 : " + authDto);
@@ -143,7 +144,7 @@ public class Tfm2022Service {
         } else if (CheckAuthId != null) {
             //A-0. 로그인 이력 있는 경우(CheckAuthId != null)
 
-            //]]]]]]]]최초 로그인 후 로그아웃 안하는 경우 lastlogout 값 null 이므로 오류가 나므로 아래처럼 처리
+            //]]]]]]]]최초 로그인 후 로그아웃 안하는 경우 lastlogout 값 null 이므로 오류가 나므로 아래처럼 처리...이거 authchecker로 해결하자
 
             //조건1. 현재시간(로그인하려는) > 최근로그아웃시간 => nowTime.isAfter(CheckAuthId.getLastlogout())
               if(nowTime.isAfter(CheckAuthId.getLastlogout())){
@@ -156,7 +157,8 @@ public class Tfm2022Service {
                                 dto.getId(),
                                 null,
                                 nowTime,
-                                CheckAuthId.getLastlogout()
+                                CheckAuthId.getLastlogout(),
+                                nowTime
                         );
                         log.info("CheckAuthId not null authDto 1 : " + authDto);
 
@@ -181,7 +183,7 @@ public class Tfm2022Service {
         return hojinToken;
     }
 
-
+    @Transactional
     public TfmAuthDto authCheck(TfmAuthDto dto) {
         //1. 토큰 복호화 => id, lastlogin추출, 사용자가 보낸 token 활용
         HojinTokenFactory hojinTokenFactory = new HojinTokenFactory(); //토큰생성용
@@ -215,6 +217,15 @@ public class Tfm2022Service {
                 //본격적으로 로그인일자 > 로그아웃일자 비교
                 if(abstractionAuthDto.getLastlogin().isAfter(date1)){
                     log.info("로그인일자 > 로그아웃일자 조건 달성");
+
+                    //2-5. tfm_auth lastrequest 시간 갱신
+                    LocalDateTime nowTime = LocalDateTime.now();
+                    nowTime = nowTime.withNano(0);
+
+                    log.info("lastrequest 시간 갱신 : " + nowTime + " id : " + abstractionAuthDto.getID());
+
+                    tfmAuthRepository.updateLastrequest(nowTime, abstractionAuthDto.getID());
+
                 } else {
                     log.info("로그인일자 > 로그아웃일자 조건 부적합");
                     abstractionAuthDto = null;
@@ -251,6 +262,7 @@ public class Tfm2022Service {
 
         abstractionAuthDto.setToken(null); //로그아웃 시 토큰은 삭제함
         abstractionAuthDto.setLastlogout(nowTime); //현재시간 로그아웃시간으로 저장 준비
+        abstractionAuthDto.setLastrequest(null);
 
         log.info("수정하기 전 " + abstractionAuthDto);
 

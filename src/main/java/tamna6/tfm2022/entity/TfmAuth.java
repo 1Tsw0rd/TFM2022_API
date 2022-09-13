@@ -23,5 +23,7 @@ public class TfmAuth {
     private LocalDateTime lastlogin;
     @Column
     private LocalDateTime lastlogout;
+    @Column
+    private LocalDateTime lastrequest;
 
 }

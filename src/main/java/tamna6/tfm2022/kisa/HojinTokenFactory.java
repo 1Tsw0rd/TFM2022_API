@@ -37,6 +37,7 @@ public class HojinTokenFactory {
                 tokenInnerId,
                 token,
                 tokenInnerLastlogin,
+                null,
                 null
         );
 
