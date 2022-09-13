@@ -1,0 +1,42 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.11'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+}
+
+group = 'tamna6'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//롬복 추가
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//runtimeOnly 'com.h2database:h2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//(테스트 )swagger 추가
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+	//Mysql
+	implementation 'mysql:mysql-connector-java'
+
+//	//로그인 - 김예진
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	testImplementation 'org.springframework.security:spring-security-test'
+	//JSONObject 테스트
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

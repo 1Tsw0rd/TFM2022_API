@@ -1,0 +1,67 @@
+body {
+    background-color: bisque;
+}
+
+.logo {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(min-content, 1fr));
+    grid-template-rows: repeat(3);
+    margin-bottom: 8px;
+}
+
+.tfmImg {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    object-fit: cover;
+}
+
+.loginSection {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(max-content, 1fr));
+    grid-template-rows: repeat(3, minmax(max-content, 1fr));
+}
+
+.inputId {
+    margin-bottom: 8px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.inputIdTxt {
+    display: grid;
+    text-align: right;
+    font-size: 18px;
+    align-items: center;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.inputPw {
+    margin-bottom: 8px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.submitBtn {
+    margin-bottom: 8px;    
+    font-size: 18px;
+    padding: 10px;
+    background-color: #256634;
+    color: white;
+    font-weight: bold;
+}
+
+.login_rel {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.foot {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(max-content, 1fr));
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: rgb(91, 91, 91);
+}
