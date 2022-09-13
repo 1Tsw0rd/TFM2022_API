@@ -21,6 +21,16 @@ public class TfmAuthDto {
 
     private LocalDateTime lastrequest;
 
+    public static TfmAuthDto authCheckerDto(TfmAuth tfmAuth) { //AuthChecker 전용
+        return new TfmAuthDto(
+                tfmAuth.getID(),
+                tfmAuth.getToken(),
+                tfmAuth.getLastlogin(),
+                tfmAuth.getLastlogout(),
+                tfmAuth.getLastrequest()
+        );
+    }
+
     public TfmAuth toEntity() {return  new TfmAuth(ID, token, lastlogin, lastlogout, lastrequest);}
 
 }
