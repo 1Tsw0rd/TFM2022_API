@@ -8,6 +8,7 @@ import tamna6.tfm2022.dto.TfmAuthDto;
 import tamna6.tfm2022.entity.TfmAuth;
 import tamna6.tfm2022.repository.TfmAuthRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -19,6 +20,9 @@ public class AuthChecker extends Exception {
 
     @Scheduled(cron = "0 0/1 * * * *") //1분마다 동작
     public void AbnormalLogout(){
+        LocalDateTime nowTime = LocalDateTime.now(); //tfm_auth에 저장될 lastlogout
+        nowTime = nowTime.withNano(0); //0으로 설정하면 나노초 9자 모두 제거.. 0이 많으면 짤리는 현상 있이서 사용
+        //log.info("nowTime test : " + nowTime);
 
         //1. tfm_auth 내 모든 row 조회
         List<TfmAuth> tfmAuthList = tfmAuthRepository.findAbnormalAuth();
@@ -36,7 +40,7 @@ public class AuthChecker extends Exception {
                         tfmAuthList.get(i).getID(),
                         null,
                         tfmAuthList.get(i).getLastlogin(),
-                        tfmAuthList.get(i).getLastrequest(),
+                        nowTime,
                         null
                         );
                 log.info("authClearEntity: " + authClearEntity);
