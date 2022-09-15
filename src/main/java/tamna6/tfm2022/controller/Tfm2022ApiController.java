@@ -82,9 +82,9 @@ public class Tfm2022ApiController {
     }
 
     @PostMapping("/api/authcheck")
-    @ApiOperation(value = "세션 검사", notes = "localhost:8080/api/authCheck")
+    @ApiOperation(value = "인증 검사", notes = "localhost:8080/api/authCheck")
     public ResponseEntity<JSONObject> checkAuth(@RequestBody TfmAuthDto dto) {
-// 로그아웃 => 로그아웃시간 갱신, 토큰값 삭제, login.html로 이동
+    // 로그아웃 => 로그아웃시간 갱신, 토큰값 삭제, login.html로 이동
 
         log.info("getToekn : " + dto.getToken());
 

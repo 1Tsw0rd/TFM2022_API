@@ -44,20 +44,4 @@ public class HojinTokenFactory {
         //3. 복호화된 DTO 반환
         return abstractionAuthDto;
     }
-
-    //토큰디코딩하는걸로 만들어]]]]]]]]]]]]
-//    public String testToekn(String test) {
-//
-//        //1. 토큰 내용 : ID + 로그인시간
-//        String readyToken = test;
-//        log.info("readyToken : " + readyToken);
-//
-//        //2. 국산 대칭키 암호 SEED 암호화
-//        Seed seed = new Seed();
-//        String hojinToken = seed.seedDecrypt(readyToken);
-//        log.info("hojinToken seedDecrypt : " + hojinToken);
-//
-//        //3. 토큰 반환
-//        return hojinToken;
-//    }
 }
